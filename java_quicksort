@@ -1,0 +1,38 @@
+
+
+public class Qsort {
+	public static void main(String[] args) {
+		int aim[] = {3,3};
+		mySort(0, aim.length-1, aim);
+		Show(aim);
+	
+	}
+	public static void mySort(int low,int hi ,int a[]) {
+		if(low>=hi) return;
+		int mid = Partation(low, hi, a);
+		mySort(low, mid-1, a);
+		mySort(mid+1, hi, a);
+	}
+	public static int Partation(int low, int high, int a[]) {
+		int temp = a[low];
+		while(low < high) {
+			while(low < high && a[high] >= temp) {
+				high--;
+			}
+			a[low] = a[high];
+			while(low<high && a[low] <= temp ) {
+				low++;
+			}
+			a[high]=a[low];
+		}
+		a[low] = temp;
+		return low;
+	}
+	public static void Show(int a[]) {
+		int len = a.length;
+		for(int i=0;i<len-1;i++) {
+			System.out.print(a[i] + " ");
+		}
+		System.out.println(a[len-1]);
+	}
+}
