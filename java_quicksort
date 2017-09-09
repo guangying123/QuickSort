@@ -1,18 +1,37 @@
-
-
 public class Qsort {
+	static int aimd; // 记录第K大元素的值
 	public static void main(String[] args) {
-		int aim[] = {3,3};
-		mySort(0, aim.length-1, aim);
+		int aim[] = {3,-3,7,2,8,8,4,3};
+		int len = aim.length;
+		mySort(0, len-1, aim);
+		MyK_max(aim, 0, len-1, len, 7);
 		Show(aim);
-	
+	    System.out.println(aimd);
 	}
+	//求无序数组中的第K大元素
+	public static void MyK_max(int a[], int low, int high,int len,int k) {
+		if(low>= high) 
+			return ;
+		int mid = Partation(low, high, a);
+		int det = len - k;
+		if(mid == det) {
+			aimd=a[mid];
+			return ;
+		}
+		if(mid > det) {
+			MyK_max(a, low, mid-1, len, k);
+		}else {
+			MyK_max(a, mid+1, high, len, k);
+		}
+	}
+	//快排
 	public static void mySort(int low,int hi ,int a[]) {
 		if(low>=hi) return;
 		int mid = Partation(low, hi, a);
 		mySort(low, mid-1, a);
 		mySort(mid+1, hi, a);
 	}
+	//快排的划分
 	public static int Partation(int low, int high, int a[]) {
 		int temp = a[low];
 		while(low < high) {
